@@ -1,10 +1,10 @@
-function Book(title, author, pages, hasBeenRead) {
+function Book(title, author, numOfPages, hasBeenRead) {
   this.title = title;
   this.author = author;
   this.pages = numOfPages;
   this.hasBeenRead = hasBeenRead ? "Has been read." : "Has not been read.";
-  this.bookInfo = function () {
-    return title + " by " + author + ", " + numOfPages + "pages, " + hasBeenRead;
+  this.info = function () {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.hasBeenRead}`;
   };
 }
 
