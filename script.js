@@ -19,11 +19,46 @@ function addBook(title, author, numOfPages, hasBeenRead) {
 
 const libraryContainer = document.querySelector('#library-list');
 function displayLibrary() {
-  library.forEach((e) => {
+  libraryContainer.innerHTML = '';
+  library.forEach((book) => {
     const bookContainer = document.createElement('div');
     bookContainer.classList.add('book-container');
-    bookContainer.textContent = e.info();
+    bookContainer.textContent = book.info();
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = "Remove";
+    deleteButton.classList.add('delete-button');
+    deleteButton.addEventListener('click', () => {
+      library.splice(library.indexOf(book), 1);
+      displayLibrary();
+    });
+
+    bookContainer.appendChild(deleteButton);
     libraryContainer.appendChild(bookContainer);
   });
 }
+
+const addButton = document.querySelector('#add-book');
+const dialog = document.querySelector('#add-book-dialog');
+const closeButton = document.querySelector('#close-button');
+const submitButton = document.querySelector('#submit-button');
+addButton.addEventListener('click', () => {
+  dialog.showModal();
+});
+
+closeButton.addEventListener('click', () => {
+  dialog.close();
+});
+
+const title = document.querySelector('#book-title');
+const author = document.querySelector('#book-author');
+const pages = document.querySelector('#book-pages');
+const beenRead = document.querySelector('#has-been-read');
+const addBookForm = document.querySelector('#add-book-form');
+addBookForm.addEventListener('submit', () => {
+  addBook(title.value, author.value, Number(pages.value), beenRead.checked);
+  addBookForm.reset();
+  displayLibrary();
+});
+
 displayLibrary();
