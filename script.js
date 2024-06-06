@@ -6,11 +6,11 @@ function Book(title, author, numOfPages, hasBeenRead) {
   this.title = title;
   this.author = author;
   this.pages = numOfPages;
-  this.hasBeenRead = hasBeenRead ? "Has been read." : "Has not been read.";
+  this.hasBeenRead = hasBeenRead;
 }
 
 Book.prototype.info = function() {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.hasBeenRead}`;
+  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.hasBeenRead ? "Has been read." : "Has not been read."}`;
 }
 
 function addBook(title, author, numOfPages, hasBeenRead) {
@@ -33,6 +33,14 @@ function displayLibrary() {
       displayLibrary();
     });
 
+    const toggleReadStatus = document.createElement('button');
+    toggleReadStatus.textContent = "Has been read?";
+    toggleReadStatus.classList.add('toggle-read-status');
+    toggleReadStatus.addEventListener('click', () => {
+      book.hasBeenRead = book.hasBeenRead ? false : true;
+      displayLibrary();
+    });
+    bookContainer.appendChild(toggleReadStatus);
     bookContainer.appendChild(deleteButton);
     libraryContainer.appendChild(bookContainer);
   });
@@ -62,3 +70,4 @@ addBookForm.addEventListener('submit', () => {
 });
 
 displayLibrary();
+
