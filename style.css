@@ -2,4 +2,13 @@
     border: 1px solid black;
     margin: 5px;
     padding: 5px;
+    width: max-content;
+}
+
+.delete-button {
+    display: block;
+}
+
+.toggle-read-status {
+    display: block;
 }
